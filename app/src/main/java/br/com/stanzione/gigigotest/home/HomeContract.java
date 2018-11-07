@@ -13,7 +13,7 @@ public class HomeContract {
     interface Presenter extends BasePresenter<View>{
         void getProducts();
     }
-    
+
     interface Model{
         List fetchProducts();
     }
