@@ -3,4 +3,7 @@
     <string name="navigation_title">My Fake Store App</string>
     <string name="navigation_image_description">Navigation Logo</string>
     <string name="navigation_item_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_item_my_orders">My orders</string>
 </resources>
