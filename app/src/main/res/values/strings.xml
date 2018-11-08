@@ -11,4 +11,6 @@
     <string name="label_quantity">Quantity</string>
     <string name="button_add_cart">Add to cart</string>
     <string name="title_product_detail">Product Detail</string>
+    <string name="message_add_cart_success">Item added successfully to your cart</string>
+    <string name="message_add_cart_failure">Error adding item to your cart</string>
 </resources>

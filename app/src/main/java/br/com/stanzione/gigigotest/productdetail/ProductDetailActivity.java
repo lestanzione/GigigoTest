@@ -25,6 +25,7 @@ import br.com.stanzione.gigigotest.util.Configs;
 import br.com.stanzione.gigigotest.util.CurrencyUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProductDetailActivity extends AppCompatActivity implements ProductDetailContract.View {
 
@@ -61,6 +62,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     @Inject
     ProductDetailContract.Presenter presenter;
 
+    int quantity = 1;
     private Product product;
 
     @Override
@@ -82,6 +84,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_product_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        productDetailQuantityTextView.setText(String.valueOf(quantity));
     }
 
     private void setupInjector(){
@@ -90,6 +94,25 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                 .inject(this);
 
         presenter.attachView(this);
+    }
+
+    @OnClick(R.id.productDetailLessImageButton)
+    public void onLessImageButtonClicked(){
+        if(quantity > 1){
+            quantity--;
+        }
+        productDetailQuantityTextView.setText(String.valueOf(quantity));
+    }
+
+    @OnClick(R.id.productDetailMoreImageButton)
+    public void onMoreImageButtonClicked(){
+        quantity++;
+        productDetailQuantityTextView.setText(String.valueOf(quantity));
+    }
+
+    @OnClick(R.id.productDetailAddCartButton)
+    public void onAddToCartButtonClicked(){
+        presenter.addToCart(product, quantity);
     }
     
     @Override
@@ -107,6 +130,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void showProductDetails(Product product) {
+        this.product = product;
 
         productDetailNameTextView.setText(product.getName());
         productDetailPriceTextView.setText(CurrencyUtil.convertToBrazilianCurrency(product.getPrice()));
@@ -120,6 +144,16 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                                 .fitCenter()
                 )
                 .into(productDetailImageView);
+    }
+
+    @Override
+    public void showAddToCartSuccessMessage() {
+        Snackbar.make(coordinatorLayout, getResources().getString(R.string.message_add_cart_success), Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showAddToCartFailureMessage() {
+        Snackbar.make(coordinatorLayout, getResources().getString(R.string.message_add_cart_failure), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
