@@ -13,4 +13,6 @@
     <string name="title_product_detail">Product Detail</string>
     <string name="message_add_cart_success">Item added successfully to your cart</string>
     <string name="message_add_cart_failure">Error adding item to your cart</string>
+    <string name="menu_item_cart">Cart</string>
+    <string name="button_continue_to_pay">Continue to Pay</string>
 </resources>
