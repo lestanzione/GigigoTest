@@ -45,17 +45,10 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
         compositeDisposable.add(
                 model.storeCartItem(product, quantity)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action() {
-                            @Override
-                            public void run() throws Exception {
-                                view.showAddToCartSuccessMessage();
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                view.showAddToCartFailureMessage();
-                            }
-                        })
+                        .subscribe(
+                                this::onItemAddedToCart,
+                                this::onItemAddedToCartError
+                        )
         );
     }
 
@@ -82,5 +75,15 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
         else{
             view.showGeneralError();
         }
+    }
+
+    private void onItemAddedToCart(){
+        view.setProgressBarVisible(false);
+        view.showAddToCartSuccessMessage();
+    }
+
+    private void onItemAddedToCartError(Throwable throwable){
+        view.setProgressBarVisible(false);
+        view.showAddToCartFailureMessage();
     }
 }
