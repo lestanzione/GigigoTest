@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -62,6 +63,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, Product
     @Override
     public void onStart() {
         super.onStart();
+        adapter.setItems(new ArrayList<>());
         presenter.getProducts();
     }
 

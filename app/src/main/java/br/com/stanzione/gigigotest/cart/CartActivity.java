@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,7 @@ public class CartActivity extends AppCompatActivity implements CartContract.View
     CartContract.Presenter presenter;
 
     private CartItemsAdapter adapter;
+    private List<CartItem> cartItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,8 @@ public class CartActivity extends AppCompatActivity implements CartContract.View
         adapter = new CartItemsAdapter(this);
         cartRecyclerView.setAdapter(adapter);
         cartRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        enableSwipe();
     }
 
     private void setupInjector(){
@@ -95,12 +99,19 @@ public class CartActivity extends AppCompatActivity implements CartContract.View
 
     @Override
     public void showCartItems(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
         adapter.setItems(cartItemList);
     }
 
     @Override
     public void updateTotalPrice(String totalPrice) {
         cartTotalAmountTextView.setText(totalPrice);
+    }
+
+    @Override
+    public void removeCartItem(CartItem cartItem, int position) {
+        adapter.removeItem(position);
+        presenter.calculateTotalPrice(cartItemList);
     }
 
     @Override
@@ -121,4 +132,27 @@ public class CartActivity extends AppCompatActivity implements CartContract.View
     public void showNetworkError() {
         Snackbar.make(coordinatorLayout , getResources().getString(R.string.message_network_error), Snackbar.LENGTH_LONG).show();
     }
+
+    private void enableSwipe(){
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+
+                if (direction == ItemTouchHelper.LEFT){
+                    CartItem cartItem = cartItemList.get(position);
+                    presenter.removeCartItem(cartItem, position);
+                }
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(cartRecyclerView);
+    }
+
 }

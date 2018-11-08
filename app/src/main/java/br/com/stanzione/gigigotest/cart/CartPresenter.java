@@ -7,6 +7,7 @@ import br.com.stanzione.gigigotest.data.CartItem;
 import br.com.stanzione.gigigotest.util.CurrencyUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 public class CartPresenter implements CartContract.Presenter {
@@ -37,6 +38,16 @@ public class CartPresenter implements CartContract.Presenter {
     }
 
     @Override
+    public void removeCartItem(CartItem cartItem, int position) {
+
+        compositeDisposable.add(
+                model.deleteCartItem(cartItem)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(() -> onCartItemDeleted(cartItem, position))
+        );
+    }
+
+    @Override
     public void attachView(CartContract.View view) {
         this.view = view;
     }
@@ -46,20 +57,20 @@ public class CartPresenter implements CartContract.Presenter {
         compositeDisposable.clear();
     }
 
-    private String calculateTotalPrice(List<CartItem> cartItemList){
+    public void calculateTotalPrice(List<CartItem> cartItemList){
         double total = 0.0;
 
         for(CartItem cartItem : cartItemList){
             total += (cartItem.getQuantity() * cartItem.getPrice());
         }
 
-        return CurrencyUtil.convertToBrazilianCurrency(total);
+        view.updateTotalPrice(CurrencyUtil.convertToBrazilianCurrency(total));
     }
 
     private void onCartItemsReceived(List<CartItem> cartItemList) {
         view.setProgressBarVisible(false);
         view.showCartItems(cartItemList);
-        view.updateTotalPrice(calculateTotalPrice(cartItemList));
+        calculateTotalPrice(cartItemList);
     }
 
     private void onCartItemsError(Throwable throwable) {
@@ -71,4 +82,9 @@ public class CartPresenter implements CartContract.Presenter {
             view.showGeneralError();
         }
     }
+
+    private void onCartItemDeleted(CartItem cartItem, int position){
+        view.removeCartItem(cartItem, position);
+    }
+
 }

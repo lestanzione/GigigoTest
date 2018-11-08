@@ -74,6 +74,12 @@ public class CartItemsAdapter extends RecyclerView.Adapter<CartItemsAdapter.View
         notifyDataSetChanged();
     }
 
+    public void removeItem(int position) {
+        cartItemList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, cartItemList.size());
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.cartItemLayout)
