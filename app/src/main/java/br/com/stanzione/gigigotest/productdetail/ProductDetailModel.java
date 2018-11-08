@@ -1,6 +1,8 @@
 package br.com.stanzione.gigigotest.productdetail;
 
+import br.com.stanzione.gigigotest.data.CartItem;
 import br.com.stanzione.gigigotest.data.Product;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.realm.Realm;
 
@@ -21,6 +23,25 @@ public class ProductDetailModel implements ProductDetailContract.Model {
         else {
             return Observable.just(product);
         }
+    }
+
+    @Override
+    public Completable storeCartItem(Product product, int quantity) {
+
+        CartItem cartItem = new CartItem();
+        cartItem.setName(product.getName());
+        cartItem.setPrice(product.getPrice());
+        cartItem.setImageUrl(product.getImageUrl());
+        cartItem.setQuantity(quantity);
+
+        return Completable.create(
+                emitter -> realm.executeTransactionAsync(realm -> {
+                    realm.copyToRealm(cartItem);
+                },
+                emitter::onComplete,
+                emitter::onError)
+        );
+
     }
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import br.com.stanzione.gigigotest.data.Product;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ProductDetailPresenter implements ProductDetailContract.Presenter {
@@ -36,6 +38,21 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     }
 
     @Override
+    public void addToCart(Product product, int quantity) {
+
+        view.setProgressBarVisible(true);
+
+        compositeDisposable.add(
+                model.storeCartItem(product, quantity)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                this::onItemAddedToCart,
+                                this::onItemAddedToCartError
+                        )
+        );
+    }
+
+    @Override
     public void attachView(ProductDetailContract.View view) {
         this.view = view;
     }
@@ -58,5 +75,15 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
         else{
             view.showGeneralError();
         }
+    }
+
+    private void onItemAddedToCart(){
+        view.setProgressBarVisible(false);
+        view.showAddToCartSuccessMessage();
+    }
+
+    private void onItemAddedToCartError(Throwable throwable){
+        view.setProgressBarVisible(false);
+        view.showAddToCartFailureMessage();
     }
 }
