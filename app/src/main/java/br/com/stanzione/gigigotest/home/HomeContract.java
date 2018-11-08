@@ -4,10 +4,12 @@ import java.util.List;
 
 import br.com.stanzione.gigigotest.BasePresenter;
 import br.com.stanzione.gigigotest.BaseView;
+import br.com.stanzione.gigigotest.data.Product;
+import io.reactivex.Observable;
 
 public class HomeContract {
     interface View extends BaseView{
-        void showProducts(List productList);
+        void showProducts(List<Product> productList);
     }
 
     interface Presenter extends BasePresenter<View>{
@@ -15,6 +17,6 @@ public class HomeContract {
     }
 
     interface Model{
-        List fetchProducts();
+        Observable<List<Product>> fetchProducts();
     }
 }

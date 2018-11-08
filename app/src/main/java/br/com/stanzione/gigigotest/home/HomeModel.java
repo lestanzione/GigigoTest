@@ -3,6 +3,8 @@ package br.com.stanzione.gigigotest.home;
 import java.util.List;
 
 import br.com.stanzione.gigigotest.api.FakeStoreApi;
+import br.com.stanzione.gigigotest.data.Product;
+import io.reactivex.Observable;
 
 public class HomeModel implements HomeContract.Model {
 
@@ -13,7 +15,7 @@ public class HomeModel implements HomeContract.Model {
     }
 
     @Override
-    public List fetchProducts() {
-        return null;
+    public Observable<List<Product>> fetchProducts() {
+        return fakeStoreApi.getProducts();
     }
 }

@@ -18,7 +18,7 @@ public class HomeModule {
 
     @Singleton
     @Provides
-    HomePresenter providesPresenter(HomeContract.Model model){
+    HomeContract.Presenter providesPresenter(HomeContract.Model model){
         HomePresenter presenter = new HomePresenter(model);
         return presenter;
     }
