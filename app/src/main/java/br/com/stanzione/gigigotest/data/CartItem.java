@@ -7,6 +7,8 @@ import io.realm.annotations.PrimaryKey;
 
 public class CartItem extends RealmObject {
 
+    public static final String ID = "id";
+
     @PrimaryKey
     private String id = UUID.randomUUID().toString();
     private String name;
