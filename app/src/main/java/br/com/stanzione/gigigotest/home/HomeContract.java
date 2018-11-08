@@ -18,5 +18,6 @@ public class HomeContract {
 
     interface Model{
         Observable<List<Product>> fetchProducts();
+        void storeProducts(List<Product> productList);
     }
 }

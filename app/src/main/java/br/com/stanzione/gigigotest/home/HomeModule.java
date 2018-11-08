@@ -5,14 +5,15 @@ import javax.inject.Singleton;
 import br.com.stanzione.gigigotest.api.FakeStoreApi;
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
 
 @Module
 public class HomeModule {
 
     @Singleton
     @Provides
-    HomeContract.Model providesModel(FakeStoreApi fakeStoreApi){
-        HomeModel model = new HomeModel(fakeStoreApi);
+    HomeContract.Model providesModel(FakeStoreApi fakeStoreApi, Realm realm){
+        HomeModel model = new HomeModel(fakeStoreApi, realm);
         return model;
     }
 

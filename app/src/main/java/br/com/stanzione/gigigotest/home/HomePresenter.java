@@ -1,5 +1,6 @@
 package br.com.stanzione.gigigotest.home;
 
+import java.io.IOException;
 import java.util.List;
 
 import br.com.stanzione.gigigotest.data.Product;
@@ -28,21 +29,10 @@ public class HomePresenter implements HomeContract.Presenter {
                 model.fetchProducts()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<List<Product>>() {
-                                   @Override
-                                   public void accept(List<Product> products) throws Exception {
-                                        System.out.println("Products: " + products.size());
-                                        view.showProducts(products);
-                                        view.setProgressBarVisible(false);
-                                   }
-                               },
-                            new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-                                    view.setProgressBarVisible(false);
-                                    throwable.printStackTrace();
-                                }
-                            })
+                    .subscribe(
+                            this::onProductsReceived,
+                            this::onProductsError
+                    )
         );
     }
 
@@ -54,5 +44,21 @@ public class HomePresenter implements HomeContract.Presenter {
     @Override
     public void dispose() {
         compositeDisposable.clear();
+    }
+
+    private void onProductsReceived(List<Product> productList){
+        model.storeProducts(productList);
+        view.showProducts(productList);
+        view.setProgressBarVisible(false);
+    }
+
+    private void onProductsError(Throwable throwable){
+        view.setProgressBarVisible(false);
+        if(throwable instanceof IOException){
+            view.showNetworkError();
+        }
+        else{
+            view.showGeneralError();
+        }
     }
 }

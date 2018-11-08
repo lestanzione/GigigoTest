@@ -4,15 +4,20 @@ import javax.inject.Singleton;
 
 import br.com.stanzione.gigigotest.home.HomeFragment;
 import br.com.stanzione.gigigotest.home.HomeModule;
+import br.com.stanzione.gigigotest.productdetail.ProductDetailActivity;
+import br.com.stanzione.gigigotest.productdetail.ProductDetailModule;
 import dagger.Component;
 
 @Singleton
 @Component(
         modules = {
+                AndroidModule.class,
                 NetworkModule.class,
-                HomeModule.class
+                HomeModule.class,
+                ProductDetailModule.class
         }
 )
 public interface ApplicationComponent {
     void inject(HomeFragment fragment);
+    void inject(ProductDetailActivity activity);
 }
