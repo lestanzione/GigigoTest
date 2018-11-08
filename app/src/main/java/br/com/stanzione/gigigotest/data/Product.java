@@ -2,7 +2,9 @@ package br.com.stanzione.gigigotest.data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
     @SerializedName("name")
     private String name;

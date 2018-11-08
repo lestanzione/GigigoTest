@@ -10,4 +10,5 @@
     <string name="message_network_error">A network error has occurred. Check your Internet connection and try again later.</string>
     <string name="label_quantity">Quantity</string>
     <string name="button_add_cart">Add to cart</string>
+    <string name="title_product_detail">Product Detail</string>
 </resources>

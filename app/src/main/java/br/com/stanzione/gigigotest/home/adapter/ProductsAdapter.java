@@ -25,8 +25,13 @@ import butterknife.ButterKnife;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
 
+    public interface OnProductSelectedListener{
+        void onProductSelected(Product product);
+    }
+
     private Context context;
     private List<Product> productList = new ArrayList();
+    private OnProductSelectedListener listener;
 
     public ProductsAdapter(Context context) {
         this.context = context;
@@ -39,7 +44,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Product currentProduct = productList.get(position);
 
         holder.productNameTextView.setText(currentProduct.getName());
@@ -54,18 +59,17 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
                 )
                 .into(holder.productImageView);
 
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        holder.linearLayout.setOnClickListener(view -> listener.onProductSelected(currentProduct));
 
     }
 
     @Override
     public int getItemCount() {
         return (null != productList ? productList.size() : 0);
+    }
+
+    public void setListener(OnProductSelectedListener listener){
+        this.listener = listener;
     }
 
     public void setItems(List<Product> productList) {

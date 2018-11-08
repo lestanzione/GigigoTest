@@ -2,6 +2,7 @@ package br.com.stanzione.gigigotest.home;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,10 +23,12 @@ import br.com.stanzione.gigigotest.App;
 import br.com.stanzione.gigigotest.R;
 import br.com.stanzione.gigigotest.data.Product;
 import br.com.stanzione.gigigotest.home.adapter.ProductsAdapter;
+import br.com.stanzione.gigigotest.productdetail.ProductDetailActivity;
+import br.com.stanzione.gigigotest.util.Configs;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeFragment extends Fragment implements HomeContract.View {
+public class HomeFragment extends Fragment implements HomeContract.View, ProductsAdapter.OnProductSelectedListener {
 
     @BindView(R.id.productRecyclerView)
     RecyclerView productRecyclerView;
@@ -77,6 +83,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         ButterKnife.bind(this, view);
 
         adapter = new ProductsAdapter(getContext());
+        adapter.setListener(this);
         productRecyclerView.setAdapter(adapter);
     }
 
@@ -102,5 +109,12 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     @Override
     public void showNetworkError() {
         Snackbar.make(productRecyclerView , getResources().getString(R.string.message_network_error), Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onProductSelected(Product product) {
+        Intent intent = new Intent(getContext(), ProductDetailActivity.class);
+        intent.putExtra(Configs.ARG_SELECTED_PRODUCT, product);
+        startActivity(intent);
     }
 }
