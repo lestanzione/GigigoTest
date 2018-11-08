@@ -1,18 +1,24 @@
 package br.com.stanzione.gigigotest.productdetail;
 
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import javax.inject.Inject;
+
+import br.com.stanzione.gigigotest.App;
 import br.com.stanzione.gigigotest.R;
 import br.com.stanzione.gigigotest.data.Product;
 import br.com.stanzione.gigigotest.util.Configs;
@@ -20,13 +26,16 @@ import br.com.stanzione.gigigotest.util.CurrencyUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProductDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity implements ProductDetailContract.View {
 
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     @BindView(R.id.productDetailImageView)
     ImageView productDetailImageView;
@@ -49,6 +58,9 @@ public class ProductDetailActivity extends AppCompatActivity {
     @BindView(R.id.productDetailAddCartButton)
     Button productDetailAddCartButton;
 
+    @Inject
+    ProductDetailContract.Presenter presenter;
+
     private Product product;
 
     @Override
@@ -56,9 +68,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        product = (Product) getIntent().getSerializableExtra(Configs.ARG_SELECTED_PRODUCT);
-
         setupUi();
+        setupInjector();
+
+        String productId = getIntent().getStringExtra(Configs.ARG_SELECTED_PRODUCT);
+        presenter.getProductDetails(productId);
+
     }
 
     private void setupUi(){
@@ -67,6 +82,31 @@ public class ProductDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_product_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void setupInjector(){
+        ((App) (getApplicationContext()))
+                .getApplicationComponent()
+                .inject(this);
+
+        presenter.attachView(this);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return false;
+        }
+
+    }
+
+    @Override
+    public void showProductDetails(Product product) {
 
         productDetailNameTextView.setText(product.getName());
         productDetailPriceTextView.setText(CurrencyUtil.convertToBrazilianCurrency(product.getPrice()));
@@ -82,19 +122,22 @@ public class ProductDetailActivity extends AppCompatActivity {
                 .into(productDetailImageView);
     }
 
-
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch(item.getItemId()){
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return false;
+    public void setProgressBarVisible(boolean visible) {
+        if (visible) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.INVISIBLE);
         }
-
     }
 
+    @Override
+    public void showGeneralError() {
+        Snackbar.make(coordinatorLayout, getResources().getString(R.string.message_general_error), Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showNetworkError() {
+        Snackbar.make(coordinatorLayout , getResources().getString(R.string.message_network_error), Snackbar.LENGTH_LONG).show();
+    }
 }

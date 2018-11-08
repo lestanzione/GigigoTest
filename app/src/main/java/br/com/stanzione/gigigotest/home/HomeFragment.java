@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, Product
     @Override
     public void onProductSelected(Product product) {
         Intent intent = new Intent(getContext(), ProductDetailActivity.class);
-        intent.putExtra(Configs.ARG_SELECTED_PRODUCT, product);
+        intent.putExtra(Configs.ARG_SELECTED_PRODUCT, product.getId());
         startActivity(intent);
     }
 }
