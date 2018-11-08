@@ -2,6 +2,7 @@ package br.com.stanzione.gigigotest;
 
 import android.app.Application;
 
+import br.com.stanzione.gigigotest.cart.CartModule;
 import br.com.stanzione.gigigotest.di.AndroidModule;
 import br.com.stanzione.gigigotest.di.ApplicationComponent;
 import br.com.stanzione.gigigotest.di.DaggerApplicationComponent;
@@ -21,6 +22,7 @@ public class App extends Application {
                 .networkModule(new NetworkModule())
                 .homeModule(new HomeModule())
                 .productDetailModule(new ProductDetailModule())
+                .cartModule(new CartModule())
                 .build();
 
         Realm.init(this);
