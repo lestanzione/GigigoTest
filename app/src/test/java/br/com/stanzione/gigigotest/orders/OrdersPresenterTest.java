@@ -78,13 +78,36 @@ public class OrdersPresenterTest {
     public void withDatabaseShouldShowOrderList(){
 
         List<Order> orderList = new ArrayList<>();
+        orderList.add(new Order());
 
         when(mockModel.fetchOrders()).thenReturn(Observable.just(orderList));
 
         presenter.getOrders();
 
         verify(mockView, times(1)).setProgressBarVisible(true);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, never()).setEmptyStateVisible(true);
         verify(mockView, times(1)).showOrders(orderList);
+        verify(mockView, times(1)).setProgressBarVisible(false);
+        verify(mockView, never()).showGeneralError();
+        verify(mockView, never()).showNetworkError();
+        verify(mockModel, times(1)).fetchOrders();
+
+    }
+
+    @Test
+    public void withEmptyDatabaseShouldShowOrderList(){
+
+        List<Order> orderList = new ArrayList<>();
+
+        when(mockModel.fetchOrders()).thenReturn(Observable.just(orderList));
+
+        presenter.getOrders();
+
+        verify(mockView, times(1)).setProgressBarVisible(true);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, times(1)).setEmptyStateVisible(true);
+        verify(mockView, never()).showOrders(anyList());
         verify(mockView, times(1)).setProgressBarVisible(false);
         verify(mockView, never()).showGeneralError();
         verify(mockView, never()).showNetworkError();
@@ -100,6 +123,8 @@ public class OrdersPresenterTest {
         presenter.getOrders();
 
         verify(mockView, times(1)).setProgressBarVisible(true);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, never()).setEmptyStateVisible(true);
         verify(mockView, never()).showOrders(anyList());
         verify(mockView, times(1)).setProgressBarVisible(false);
         verify(mockView, times(1)).showGeneralError();

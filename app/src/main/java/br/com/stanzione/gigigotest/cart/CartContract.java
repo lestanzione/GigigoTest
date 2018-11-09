@@ -14,6 +14,7 @@ public interface CartContract {
         void showCartItems(List<CartItem> cartItemList);
         void updateTotalPrice(String totalPrice);
         void removeCartItem(CartItem cartItem, int position);
+        void setEmptyStateVisible(boolean visible);
     }
 
     interface Presenter extends BasePresenter<View> {

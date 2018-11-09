@@ -11,6 +11,7 @@ public interface OrdersContract {
 
     interface View extends BaseView {
         void showOrders(List<Order> orderList);
+        void setEmptyStateVisible(boolean visible);
     }
 
     interface Presenter extends BasePresenter<View> {

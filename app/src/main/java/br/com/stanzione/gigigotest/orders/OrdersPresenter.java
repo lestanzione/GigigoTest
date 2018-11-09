@@ -23,6 +23,7 @@ public class OrdersPresenter implements OrdersContract.Presenter {
     public void getOrders() {
 
         view.setProgressBarVisible(true);
+        view.setEmptyStateVisible(false);
 
         compositeDisposable.add(
                 model.fetchOrders()
@@ -47,7 +48,12 @@ public class OrdersPresenter implements OrdersContract.Presenter {
 
     private void onOrdersReceived(List<Order> orderList){
         view.setProgressBarVisible(false);
-        view.showOrders(orderList);
+        if(orderList.isEmpty()){
+            view.setEmptyStateVisible(true);
+        }
+        else {
+            view.showOrders(orderList);
+        }
     }
 
     private void onOrdersError(Throwable throwable){
