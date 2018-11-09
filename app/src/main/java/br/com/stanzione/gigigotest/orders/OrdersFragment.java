@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,9 @@ public class OrdersFragment extends Fragment implements OrdersContract.View {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+
+    @BindView(R.id.orderEmptyStateTextView)
+    TextView orderEmptyStateTextView;
 
     @Inject
     OrdersContract.Presenter presenter;
@@ -88,6 +92,15 @@ public class OrdersFragment extends Fragment implements OrdersContract.View {
     @Override
     public void showOrders(List<Order> orderList) {
         adapter.setItems(orderList);
+    }
+
+    @Override
+    public void setEmptyStateVisible(boolean visible) {
+        if (visible) {
+            orderEmptyStateTextView.setVisibility(View.VISIBLE);
+        } else {
+            orderEmptyStateTextView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

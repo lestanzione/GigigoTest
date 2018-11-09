@@ -31,4 +31,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_orders">Orders</string>
     <string name="title_home">Home</string>
+    <string name="empty_state_cart">There is no items in your cart</string>
+    <string name="empty_state_order">There is no order here</string>
 </resources>

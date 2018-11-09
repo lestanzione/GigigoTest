@@ -25,6 +25,7 @@ public class CartPresenter implements CartContract.Presenter {
     public void getCartItems() {
 
         view.setProgressBarVisible(true);
+        view.setEmptyStateVisible(false);
 
         compositeDisposable.add(
                 model.fetchCartItems()
@@ -69,8 +70,13 @@ public class CartPresenter implements CartContract.Presenter {
 
     private void onCartItemsReceived(List<CartItem> cartItemList) {
         view.setProgressBarVisible(false);
-        view.showCartItems(cartItemList);
-        calculateTotalPrice(cartItemList);
+        if(cartItemList.isEmpty()){
+            view.setEmptyStateVisible(true);
+        }
+        else {
+            view.showCartItems(cartItemList);
+            calculateTotalPrice(cartItemList);
+        }
     }
 
     private void onCartItemsError(Throwable throwable) {

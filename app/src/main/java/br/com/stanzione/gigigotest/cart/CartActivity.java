@@ -36,6 +36,9 @@ public class CartActivity extends AppCompatActivity implements CartContract.View
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.cartEmptyStateTextView)
+    TextView cartEmptyStateTextView;
+
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
@@ -123,6 +126,15 @@ public class CartActivity extends AppCompatActivity implements CartContract.View
     public void removeCartItem(CartItem cartItem, int position) {
         adapter.removeItem(position);
         presenter.calculateTotalPrice(cartItemList);
+    }
+
+    @Override
+    public void setEmptyStateVisible(boolean visible) {
+        if (visible) {
+            cartEmptyStateTextView.setVisibility(View.VISIBLE);
+        } else {
+            cartEmptyStateTextView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
