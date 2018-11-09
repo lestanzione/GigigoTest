@@ -79,7 +79,31 @@ public class CartPresenterTest {
     }
 
     @Test
-    public void withDatabaseShouldShowProductDetail(){
+    public void withDatabaseShouldShowCartList(){
+
+        List<CartItem> cartItemList = new ArrayList<>();
+        cartItemList.add(new CartItem());
+
+        when(mockModel.fetchCartItems()).thenReturn(Observable.just(cartItemList));
+
+        presenter.getCartItems();
+
+        verify(mockView, times(1)).setProgressBarVisible(true);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, never()).setEmptyStateVisible(true);
+        verify(mockView, times(1)).showCartItems(cartItemList);
+        verify(mockView, times(1)).setProgressBarVisible(false);
+        verify(mockView, times(1)).updateTotalPrice(anyString());
+        verify(mockView, never()).removeCartItem(any(CartItem.class), anyInt());
+        verify(mockView, never()).showGeneralError();
+        verify(mockView, never()).showNetworkError();
+        verify(mockModel, times(1)).fetchCartItems();
+        verify(mockModel, never()).deleteCartItem(any(CartItem.class));
+
+    }
+
+    @Test
+    public void withEmptyDatabaseShouldShowEmptyState(){
 
         List<CartItem> cartItemList = new ArrayList<>();
 
@@ -88,9 +112,11 @@ public class CartPresenterTest {
         presenter.getCartItems();
 
         verify(mockView, times(1)).setProgressBarVisible(true);
-        verify(mockView, times(1)).showCartItems(cartItemList);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, times(1)).setEmptyStateVisible(true);
+        verify(mockView, never()).showCartItems(anyList());
         verify(mockView, times(1)).setProgressBarVisible(false);
-        verify(mockView, times(1)).updateTotalPrice(anyString());
+        verify(mockView, never()).updateTotalPrice(anyString());
         verify(mockView, never()).removeCartItem(any(CartItem.class), anyInt());
         verify(mockView, never()).showGeneralError();
         verify(mockView, never()).showNetworkError();
@@ -107,6 +133,8 @@ public class CartPresenterTest {
         presenter.getCartItems();
 
         verify(mockView, times(1)).setProgressBarVisible(true);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, never()).setEmptyStateVisible(true);
         verify(mockView, never()).showCartItems(anyList());
         verify(mockView, times(1)).setProgressBarVisible(false);
         verify(mockView, never()).updateTotalPrice(anyString());
@@ -129,6 +157,8 @@ public class CartPresenterTest {
         presenter.removeCartItem(cartItem, position);
 
         verify(mockView, never()).setProgressBarVisible(true);
+        verify(mockView, never()).setEmptyStateVisible(false);
+        verify(mockView, never()).setEmptyStateVisible(true);
         verify(mockView, never()).showCartItems(anyList());
         verify(mockView, never()).setProgressBarVisible(false);
         verify(mockView, never()).updateTotalPrice(anyString());
