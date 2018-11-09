@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cartItemLayout"
+    android:padding="8dp">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/cartItemImageView" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/cartItemNameTextView"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cartItemDescriptionTextView"
+        app:layout_constraintStart_toEndOf="@id/cartItemImageView"
+        app:layout_constraintEnd_toStartOf="@id/cartItemTotalPriceTextView"
+        tools:text="Cart Item Name"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/cartItemDescriptionTextView"
+        android:textSize="14sp"
+        android:textColor="@color/colorSecondaryText"
+        app:layout_constraintTop_toBottomOf="@id/cartItemNameTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cartItemImageView"
+        app:layout_constraintEnd_toStartOf="@id/cartItemTotalPriceTextView"
+        tools:text="Cart Item Name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cartItemTotalPriceTextView"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="150,89"/>
+
+</android.support.constraint.ConstraintLayout>

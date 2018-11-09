@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">GigigoTest</string>
+    <string name="navigation_title">My Fake Store App</string>
+    <string name="navigation_image_description">Navigation Logo</string>
+    <string name="navigation_item_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_item_my_orders">My orders</string>
+    <string name="message_general_error">We found an error. Please try again later.</string>
+    <string name="message_network_error">A network error has occurred. Check your Internet connection and try again later.</string>
+    <string name="label_quantity">Quantity</string>
+    <string name="button_add_cart">Add to cart</string>
+    <string name="title_product_detail">Product Detail</string>
+    <string name="message_add_cart_success">Item added successfully to your cart</string>
+    <string name="message_add_cart_failure">Error adding item to your cart</string>
+    <string name="menu_item_cart">Cart</string>
+    <string name="button_continue_to_pay">Continue to Pay</string>
+    <string name="title_cart">Cart</string>
+    <string name="label_card_number">Card Number</string>
+    <string name="label_card_name">Card Name</string>
+    <string name="label_card_valid">Valid Thru</string>
+    <string name="label_cvv">CVV</string>
+    <string name="button_purchase">Purchase</string>
+    <string name="title_card_information">Card Information</string>
+    <string name="error_card_number_length">Number must have 16 digits</string>
+    <string name="error_card_name_empty">Name must not be empty</string>
+    <string name="error_card_valid">Invalid month/year</string>
+    <string name="error_card_cvv_length">CVV must have 3 digits</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_home">Home</string>
+    <string name="empty_state_cart">There is no items in your cart</string>
+    <string name="empty_state_order">There is no order here</string>
+    <string name="title_dialog_purchased">Purchased!</string>
+    <string name="message_dialog_purchased">You purchase has been processed successfully</string>
+    <string name="label_total_price">Total Price</string>
+</resources>

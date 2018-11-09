@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/coordinator"
+    tools:context=".cardinfo.CardInfoActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/ToolBarStyle" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardInfoNumberTextView"
+            android:text="@string/label_card_number"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardInfoNumberEditText"
+            android:maxLength="16"
+            android:inputType="number"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/cardInfoNumberTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardInfoNameTextView"
+            android:text="@string/label_card_name"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/cardInfoNumberEditText"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardInfoNameEditText"
+            android:inputType="textCapWords"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/cardInfoNameTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardInfoValidTextView"
+            android:text="@string/label_card_valid"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/cardInfoNameEditText"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardInfoValidEditText"
+            android:inputType="number"
+            android:digits="0123456789/"
+            android:maxLength="5"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/cardInfoValidTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cardInfoCvvEditText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardInfoCvvTextView"
+            android:text="@string/label_cvv"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/cardInfoNameEditText"
+            app:layout_constraintStart_toStartOf="@id/cardInfoCvvEditText"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardInfoCvvEditText"
+            android:inputType="number"
+            android:maxLength="3"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/cardInfoValidTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cardInfoValidEditText"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/finishPurchaseButton"
+            android:text="@string/button_purchase"
+            android:background="@drawable/bg_button"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/cardInfoValidEditText"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.design.widget.CoordinatorLayout>
