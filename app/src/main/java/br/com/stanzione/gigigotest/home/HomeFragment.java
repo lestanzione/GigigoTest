@@ -84,6 +84,8 @@ public class HomeFragment extends Fragment implements HomeContract.View, Product
     private void setupUi(View view){
         ButterKnife.bind(this, view);
 
+        getActivity().setTitle(R.string.title_home);
+
         adapter = new ProductsAdapter(getContext());
         adapter.setListener(this);
         productRecyclerView.setAdapter(adapter);
