@@ -33,4 +33,7 @@
     <string name="title_home">Home</string>
     <string name="empty_state_cart">There is no items in your cart</string>
     <string name="empty_state_order">There is no order here</string>
+    <string name="title_dialog_purchased">Purchased!</string>
+    <string name="message_dialog_purchased">You purchase has been processed successfully</string>
+    <string name="label_total_price">Total Price</string>
 </resources>

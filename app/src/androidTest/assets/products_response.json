@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Camiseta Básica",
+    "price": 12.00,
+    "photo": "https://http2.mlstatic.com/camiseta-basica-lisa-100-algodo-g1-g2-g3-tamanho-grande-D_NQ_NP_940325-MLB25404304554_022017-F.jpg"
+  },
+  {
+    "name": "Camiseta Listrada",
+    "price": 18.70,
+    "photo": "https://d129q82p91aw7f.cloudfront.net/ada6e8c5b1b6/camiseta-listrada-com-bolso-navy.214x311.jpg"
+  },
+  {
+    "name": "Camiseta Polo",
+    "price": 23.45,
+    "photo": "https://media.shoes4you.com.br/79b4129bc818/camisa-polo-wg-clothing-masculina-cinza-claro.214x311.jpg"
+  },
+  {
+    "name": "Camisa Social",
+    "price": 45.99,
+    "photo": "https://enjoytrend.com/image/cache/catalog/produtos/masculino/camisa/1281/12811-800x800.jpg"
+  },
+  {
+    "name": "Calça Social",
+    "price": 80.70,
+    "photo": "https://images.tcdn.com.br/img/img_prod/257078/1383_1_20120719175506.jpg"
+  },
+  {
+    "name": "Calça Jeans",
+    "price": 75.60,
+    "photo": "https://cdn-tng-solo.omniplat.io/media/catalog/product/cache/image/560x767/040ec09b1e35df139433887a97daa66f/v/1/v17mcjd80_817_subir_depois_2_.jpg"
+  }
+]
