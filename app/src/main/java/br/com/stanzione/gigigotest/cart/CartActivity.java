@@ -1,5 +1,6 @@
 package br.com.stanzione.gigigotest.cart;
 
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,10 +21,12 @@ import javax.inject.Inject;
 
 import br.com.stanzione.gigigotest.App;
 import br.com.stanzione.gigigotest.R;
+import br.com.stanzione.gigigotest.cardinfo.CardInfoActivity;
 import br.com.stanzione.gigigotest.cart.adapter.CartItemsAdapter;
 import br.com.stanzione.gigigotest.data.CartItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CartActivity extends AppCompatActivity implements CartContract.View {
 
@@ -82,6 +85,14 @@ public class CartActivity extends AppCompatActivity implements CartContract.View
                 .inject(this);
 
         presenter.attachView(this);
+    }
+
+    @OnClick(R.id.cartPayButton)
+    public void onCartPayButtonClicked(){
+        if(null != cartItemList && !cartItemList.isEmpty()) {
+            Intent intent = new Intent(this, CardInfoActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
