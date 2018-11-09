@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import br.com.stanzione.gigigotest.R;
 import br.com.stanzione.gigigotest.main.MainActivity;
 
 public class PurchaseDialog extends DialogFragment {
@@ -22,8 +23,8 @@ public class PurchaseDialog extends DialogFragment {
         setCancelable(false);
 
         return new AlertDialog.Builder(getActivity())
-                .setTitle("Purchased!")
-                .setMessage("You purchase has been processed successfully")
+                .setTitle(R.string.title_dialog_purchased)
+                .setMessage(getContext().getString(R.string.message_dialog_purchased))
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

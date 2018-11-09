@@ -1,6 +1,7 @@
 package br.com.stanzione.gigigotest;
 
 import android.app.Application;
+import android.support.annotation.VisibleForTesting;
 
 import br.com.stanzione.gigigotest.cardinfo.CardInfoModule;
 import br.com.stanzione.gigigotest.cart.CartModule;
@@ -34,6 +35,11 @@ public class App extends Application {
 
     public ApplicationComponent getApplicationComponent() {
         return applicationComponent;
+    }
+
+    @VisibleForTesting
+    public void setApplicationComponent(ApplicationComponent applicationComponent) {
+        this.applicationComponent = applicationComponent;
     }
 
 }
