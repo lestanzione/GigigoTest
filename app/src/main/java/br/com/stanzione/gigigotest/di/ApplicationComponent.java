@@ -2,6 +2,8 @@ package br.com.stanzione.gigigotest.di;
 
 import javax.inject.Singleton;
 
+import br.com.stanzione.gigigotest.cardinfo.CardInfoActivity;
+import br.com.stanzione.gigigotest.cardinfo.CardInfoModule;
 import br.com.stanzione.gigigotest.cart.CartActivity;
 import br.com.stanzione.gigigotest.cart.CartModule;
 import br.com.stanzione.gigigotest.home.HomeFragment;
@@ -17,11 +19,13 @@ import dagger.Component;
                 NetworkModule.class,
                 HomeModule.class,
                 ProductDetailModule.class,
-                CartModule.class
+                CartModule.class,
+                CardInfoModule.class
         }
 )
 public interface ApplicationComponent {
     void inject(HomeFragment fragment);
     void inject(ProductDetailActivity activity);
     void inject(CartActivity activity);
+    void inject(CardInfoActivity activity);
 }

@@ -89,8 +89,10 @@ public class CartActivity extends AppCompatActivity implements CartContract.View
 
     @OnClick(R.id.cartPayButton)
     public void onCartPayButtonClicked(){
-        Intent intent = new Intent(this, CardInfoActivity.class);
-        startActivity(intent);
+        if(null != cartItemList && !cartItemList.isEmpty()) {
+            Intent intent = new Intent(this, CardInfoActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override

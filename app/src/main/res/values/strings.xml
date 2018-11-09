@@ -22,4 +22,8 @@
     <string name="label_cvv">CVV</string>
     <string name="button_purchase">Purchase</string>
     <string name="title_card_information">Card Information</string>
+    <string name="error_card_number_length">Number must have 16 digits</string>
+    <string name="error_card_name_empty">Name must not be empty</string>
+    <string name="error_card_valid">Invalid month/year</string>
+    <string name="error_card_cvv_length">CVV must have 3 digits</string>
 </resources>
