@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.navHome);
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.navHome));
     }
 
     @Override

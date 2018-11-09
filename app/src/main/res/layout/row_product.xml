@@ -5,7 +5,16 @@
     android:layout_height="wrap_content"
     android:id="@+id/productLayout"
     android:orientation="vertical"
+    android:clipToPadding="false"
+    android:padding="4dp"
     android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:elevation="4dp">
 
     <ImageView
         android:layout_width="130dp"
@@ -38,5 +47,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         tools:text="Product Price"/>
+
+    </LinearLayout>
 
 </LinearLayout>
