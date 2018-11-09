@@ -8,6 +8,8 @@ import br.com.stanzione.gigigotest.cart.CartActivity;
 import br.com.stanzione.gigigotest.cart.CartModule;
 import br.com.stanzione.gigigotest.home.HomeFragment;
 import br.com.stanzione.gigigotest.home.HomeModule;
+import br.com.stanzione.gigigotest.orders.OrdersFragment;
+import br.com.stanzione.gigigotest.orders.OrdersModule;
 import br.com.stanzione.gigigotest.productdetail.ProductDetailActivity;
 import br.com.stanzione.gigigotest.productdetail.ProductDetailModule;
 import dagger.Component;
@@ -20,7 +22,8 @@ import dagger.Component;
                 HomeModule.class,
                 ProductDetailModule.class,
                 CartModule.class,
-                CardInfoModule.class
+                CardInfoModule.class,
+                OrdersModule.class
         }
 )
 public interface ApplicationComponent {
@@ -28,4 +31,5 @@ public interface ApplicationComponent {
     void inject(ProductDetailActivity activity);
     void inject(CartActivity activity);
     void inject(CardInfoActivity activity);
+    void inject(OrdersFragment fragment);
 }

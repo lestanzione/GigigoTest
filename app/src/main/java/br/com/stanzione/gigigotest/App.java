@@ -9,6 +9,7 @@ import br.com.stanzione.gigigotest.di.ApplicationComponent;
 import br.com.stanzione.gigigotest.di.DaggerApplicationComponent;
 import br.com.stanzione.gigigotest.di.NetworkModule;
 import br.com.stanzione.gigigotest.home.HomeModule;
+import br.com.stanzione.gigigotest.orders.OrdersModule;
 import br.com.stanzione.gigigotest.productdetail.ProductDetailModule;
 import io.realm.Realm;
 
@@ -25,6 +26,7 @@ public class App extends Application {
                 .productDetailModule(new ProductDetailModule())
                 .cartModule(new CartModule())
                 .cardInfoModule(new CardInfoModule())
+                .ordersModule(new OrdersModule())
                 .build();
 
         Realm.init(this);
