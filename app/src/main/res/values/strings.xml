@@ -26,4 +26,8 @@
     <string name="error_card_name_empty">Name must not be empty</string>
     <string name="error_card_valid">Invalid month/year</string>
     <string name="error_card_cvv_length">CVV must have 3 digits</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_orders">Orders</string>
 </resources>

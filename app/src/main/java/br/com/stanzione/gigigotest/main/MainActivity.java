@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import br.com.stanzione.gigigotest.R;
 import br.com.stanzione.gigigotest.cart.CartActivity;
 import br.com.stanzione.gigigotest.home.HomeFragment;
+import br.com.stanzione.gigigotest.orders.OrdersFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.navHome) {
             fragment = new HomeFragment();
+        }
+        else if (id == R.id.navOrders) {
+            fragment = new OrdersFragment();
         }
 
         if(null != fragment){
